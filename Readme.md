@@ -51,11 +51,30 @@ Open a new terminal after installing.
 ### 2. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/okf-sql-knowledge.git
+git clone https://github.com/Lmalviya/okf-sql-knowledge.git
 cd okf-sql-knowledge
 ```
 
 ### 3. Create and activate a virtual environment
+
+#### Option A: Using `uv` (Recommended)
+
+```bash
+uv venv
+```
+
+Activate the environment:
+
+- macOS / Linux:
+  ```bash
+  source .venv/bin/activate
+  ```
+- Windows (PowerShell):
+  ```powershell
+  .venv\Scripts\Activate.ps1
+  ```
+
+#### Option B: Using standard `venv`
 
 macOS:
 
@@ -80,6 +99,14 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 Your prompt now starts with `(.venv)`. Activate the environment again whenever you open a new terminal.
 
 ### 4. Install the dependencies
+
+#### Option A: Using `uv` (Recommended)
+
+```bash
+uv sync
+```
+
+#### Option B: Using `pip` with `requirements.txt`
 
 ```bash
 pip install -r requirements.txt
@@ -130,11 +157,16 @@ It needs Python 3.11+ and PyYAML, both covered by the steps above.
 
 ```text
 okf-sql-knowledge/
+├── bundles/                      OKF bundles
+│   └── disaster/                 disaster response database bundle
 ├── data/
-│   ├── README.md      guide to the benchmark files
+│   ├── README.md                 guide to the benchmark files
 │   └── livesqlbench-base-lite/   raw LiveSQLBench files (downloaded, not committed)
-├── bundles/           OKF bundles
-├── requirements.txt
+├── tools/                        external tools (downloaded, not committed)
+│   └── okf_validate.py           OKF validator script
+├── pyproject.toml                project configuration for uv / packaging
+├── requirements.txt              pinned dependencies (for pip)
+├── uv.lock                       dependency lockfile for uv
 └── README.md
 ```
 
