@@ -103,6 +103,29 @@ You should see three files: `disaster_column_meaning_base.json`, `disaster_kb.js
 
 The correct SQL answers and test cases are not public. If you want them, request them by email as described on the [dataset page](https://huggingface.co/datasets/birdsql/livesqlbench-base-lite). They are only needed for the evaluation in Part 4.
 
+### 6. Get the OKF validator
+
+We check bundles with the validator from [okf-skills](https://github.com/scaccogatto/okf-skills) (MIT license). It's a single Python file, so we download only that file, pinned to a fixed commit so everyone gets the same results.
+
+macOS:
+```bash
+mkdir -p tools
+curl -L -o tools/okf_validate.py https://raw.githubusercontent.com/scaccogatto/okf-skills/8e3187875e66051bb52f91a5ed27342e2c3208da/skills/validate/scripts/okf_validate.py
+```
+
+Windows (PowerShell; curl.exe is built into Windows 10 and 11):
+```PowerShell
+mkdir tools
+curl.exe -L -o tools\okf_validate.py https://raw.githubusercontent.com/scaccogatto/okf-skills/8e3187875e66051bb52f91a5ed27342e2c3208da/skills/validate/scripts/okf_validate.py
+```
+Run it on a bundle (with the virtual environment active):
+
+```bash
+python tools/okf_validate.py bundles/disaster
+```
+
+It needs Python 3.11+ and PyYAML, both covered by the steps above.
+
 ## Repository layout
 
 ```text
@@ -118,5 +141,7 @@ okf-sql-knowledge/
 ## Data and licenses
 
 The LiveSQLBench files are **not included** in this repository. Download them from the source, as shown in [step 5](#5-download-the-benchmark-data). LiveSQLBench data is published by the BIRD team at HKU and Google Cloud. Its license is stated as CC BY 4.0 on Hugging Face and as CC BY-SA 4.0 in the [GitHub repository](https://github.com/bird-bench/livesqlbench); we follow the stricter CC BY-SA 4.0. See [data/README.md](data/README.md) for what the files contain.
+
+The validator in `tools/` comes from [okf-skills](https://github.com/scaccogatto/okf-skills) by Marco Boffo (MIT license). It's downloaded, not committed.
 
 License for this repository's own code: LICENSE-TBD.
