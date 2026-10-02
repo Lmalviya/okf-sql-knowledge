@@ -1,0 +1,11 @@
+[project]
+name = "okf-sql-knowledge"
+version = "0.1.0"
+description = "A knowledge layer for SQL agents, built with OKF (Open Knowledge Format) and tested on LiveSQLBench"
+readme = "Readme.md"
+requires-python = ">=3.11"
+dependencies = []
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
