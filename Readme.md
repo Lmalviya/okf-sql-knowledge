@@ -6,6 +6,8 @@ SQL agents can read a database schema, but not the business rules behind it. Thi
 
 This repository accompanies the blog series **Build a Knowledge Layer for SQL Agents with OKF**.
 
+> **Following the blog and want to build everything yourself?** Use the [tutorial guide](TUTORIAL.md) instead. This README is for running the finished code.
+
 ## The series
 
 | Part | What you build | Post |
@@ -17,11 +19,11 @@ This repository accompanies the blog series **Build a Knowledge Layer for SQL Ag
 
 ## Requirements
 
-- **Python 3.11 or newer**
+- **Python 3.11 or newer** (or **[uv](https://docs.astral.sh/uv/)**)
 - **Git**
 - **Docker Desktop**: needed from Part 3 onward, to run the benchmark database
 
-## Setup
+## Quick start
 
 ### 1. Check Python and Git
 
@@ -45,6 +47,7 @@ If something is missing or Python is older than 3.11:
 |---|---|---|
 | Python | `brew install python@3.12` (with [Homebrew](https://brew.sh)), then use `python3.12` | `winget install Python.Python.3.12`, or the [python.org](https://www.python.org/downloads/) installer with **"Add python.exe to PATH"** ticked |
 | Git | `xcode-select --install` | `winget install --id Git.Git -e` |
+| uv *(optional)* | `brew install uv` or `curl -LsSf https://astral.sh/uv/install.sh \| sh` | `winget install --id astral-sh.uv -e` or `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 \| iex"` |
 
 Open a new terminal after installing.
 
@@ -109,65 +112,78 @@ uv sync
 #### Option B: Using `pip` with `requirements.txt`
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
+```
+
+Check that it worked; this should print `6.0.3`:
+
+```bash
+python -c "import yaml; print(yaml.__version__)"
 ```
 
 ### 5. Download the benchmark data
 
-We use the **Base-Lite** release of [LiveSQLBench](https://huggingface.co/datasets/birdsql/livesqlbench-base-lite): 18 databases and 270 questions, a few megabytes in total. From the project folder (same command on macOS and Windows):
+We use the **Base-Lite** release of [LiveSQLBench](https://huggingface.co/datasets/birdsql/livesqlbench-base-lite): 18 databases and 270 questions, a few megabytes in total. Same command on macOS and Windows:
 
 ```bash
 git clone https://huggingface.co/datasets/birdsql/livesqlbench-base-lite data/livesqlbench-base-lite
 ```
 
-Check that it worked:
-
-```bash
-ls data/livesqlbench-base-lite/disaster
-```
-
-You should see three files: `disaster_column_meaning_base.json`, `disaster_kb.jsonl` and `disaster_schema.txt`.
-
 The correct SQL answers and test cases are not public. If you want them, request them by email as described on the [dataset page](https://huggingface.co/datasets/birdsql/livesqlbench-base-lite). They are only needed for the evaluation in Part 4.
 
 ### 6. Get the OKF validator
 
-We check bundles with the validator from [okf-skills](https://github.com/scaccogatto/okf-skills) (MIT license). It's a single Python file, so we download only that file, pinned to a fixed commit so everyone gets the same results.
+We check bundles with the validator from [okf-skills](https://github.com/scaccogatto/okf-skills) (MIT license), downloaded as a single file pinned to a fixed commit.
 
 macOS:
+
 ```bash
 mkdir -p tools
 curl -L -o tools/okf_validate.py https://raw.githubusercontent.com/scaccogatto/okf-skills/8e3187875e66051bb52f91a5ed27342e2c3208da/skills/validate/scripts/okf_validate.py
 ```
 
-Windows (PowerShell; curl.exe is built into Windows 10 and 11):
-```PowerShell
+Windows (PowerShell; `curl.exe` is built into Windows 10 and 11):
+
+```powershell
 mkdir tools
 curl.exe -L -o tools\okf_validate.py https://raw.githubusercontent.com/scaccogatto/okf-skills/8e3187875e66051bb52f91a5ed27342e2c3208da/skills/validate/scripts/okf_validate.py
 ```
-Run it on a bundle (with the virtual environment active):
+
+### 7. Validate the Part 1 bundle
 
 ```bash
 python tools/okf_validate.py bundles/disaster
 ```
 
-It needs Python 3.11+ and PyYAML, both covered by the steps above.
+*(Or with uv without activating: `uv run python tools/okf_validate.py bundles/disaster`)*
+
+Expected output:
+
+```text
+OKF v0.2 conformance — bundles/disaster
+  concepts: 3   index.md: 3   log.md: 1
+  ! warn   tables/distributionhubs.md: cross-link target not found: `/tables/disasterevents.md` (tolerated under §6.1)
+  ✓ conformant (1 warning(s))
+```
+
+The warning is expected; Part 1 explains why. If you see `ModuleNotFoundError: No module named 'yaml'`, the virtual environment isn't active. Activate it (step 3), run step 4 again, then retry.
 
 ## Repository layout
 
 ```text
 okf-sql-knowledge/
-├── bundles/                      OKF bundles
-│   └── disaster/                 disaster response database bundle
+├── README.md          this file: run the finished code
+├── TUTORIAL.md        build it yourself, following the blog
+├── pyproject.toml     project and dependency configuration (uv)
+├── requirements.txt   pinned dependencies (pip)
+├── uv.lock            dependency lockfile for uv
 ├── data/
-│   ├── README.md                 guide to the benchmark files
+│   ├── README.md      guide to the benchmark files
 │   └── livesqlbench-base-lite/   raw LiveSQLBench files (downloaded, not committed)
-├── tools/                        external tools (downloaded, not committed)
-│   └── okf_validate.py           OKF validator script
-├── pyproject.toml                project configuration for uv / packaging
-├── requirements.txt              pinned dependencies (for pip)
-├── uv.lock                       dependency lockfile for uv
-└── README.md
+├── bundles/
+│   └── disaster/      the hand-written bundle from Part 1
+└── tools/
+    └── okf_validate.py   the OKF validator (downloaded, not committed)
 ```
 
 ## Data and licenses
