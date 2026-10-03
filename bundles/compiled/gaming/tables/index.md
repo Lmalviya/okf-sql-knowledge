@@ -1,0 +1,10 @@
+# PostgreSQL Table
+
+* [audioandmedia](audioandmedia.md) - 24 columns: sndleveldb, sndsig, noiseisodb, audlatms, micsensedb, micfreqresp, spkimpohm, spksensedb, thdpct, freqresp, drvszmm, surrsnd, eqcount, micmon, noisecanc, btversion, btrangem, btlatms, multidev, autoslpmin, wakems. Joins to deviceidentity, performance.
+* [deviceidentity](deviceidentity.md) - 22 columns: makername, modnum, fwver, conntype, wlrangem, wlinterf, wlchanhop, wllatvar, pwridlemw, pwractmw, pwrrgbmw, brdmemmb, profcount, mcresptime, mcexecspeed, mctimacc, dpires, dpisteps, senstype, sensres. Joins to testsessions.
+* [interactionandcontrol](interactionandcontrol.md) - 21 columns: amblight, tempsense, accelsense, gyrosense, hapfeed, hapstr, vibmodes, forcefeed, trigres, trigtravmm, joydead, joyprec, btnspcmm, btnszmm, dpadvar, dpadacc, astickvar, driftres. Joins to deviceidentity, physicaldurability.
+* [mechanical](mechanical.md) - 25 columns: keyforceg, keytravmm, swtchvar, swtchdur, ghostkeys, keyrollo, swtchcons, ghosteff, keychatter, actpointmm, respointmm, tacbumpmm, tottravmm, stabrattle, stabtype, capthkmm, capmat, caplegmeth, kbdangle, wristflag, palmangle, ergorate. Joins to deviceidentity, performance.
+* [performance](performance.md) - 12 columns: accelmax, speedips, liftdistmm, angsnap, btntens, clklat, clkdur, screnctyp, scrsteps, scraccy. Joins to testsessions.
+* [physicaldurability](physicaldurability.md) - 27 columns: wgtgram, wgtdist, cablegram, cabledrag, feetmat, feetthkmm, glidecons, fricstatic, frickinetic, surfcompat, gripsty, gripcoat, gripdur, sweatres, tempres, humidres, dustres, waterres, impres, drophtm, bendforce, twistdeg, cablebend, usbconndur. Joins to performance, rgb.
+* [rgb](rgb.md) - 9 columns: rgbbright, rgbcoloracc, rgbrfrate, rgbmodes, rgbzones, rgbcolors. Joins to audioandmedia, mechanical.
+* [testsessions](testsessions.md) - 20 columns: stampmoment, devscope, cpuusepct, memusemb, driverstatus, fwupdur, wlsignal, battlevel, battcapmah, battlifeh, chgtimemin, qchgflag, usbpwrline, latms, inplagms, pollratehz, dbtimems, resptimems, clkregms.

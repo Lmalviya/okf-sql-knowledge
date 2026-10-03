@@ -1,0 +1,9 @@
+# PostgreSQL Table
+
+* [container](container.md) - 15 columns: containmodel, volliters, masskg, containflag, coolkind, coolmass, coolremainpct, coolrefills, refilllatest, refillnext, batterypct, pwrfeed, pwrbackupflag. Joins to shipments.
+* [datalogger](datalogger.md) - 19 columns: logflag, loginterval, transmitflag, datauptime, datapct, batteryswap, firmvers, softupdate, syshealth, memusepct, storecapmb, storeremainmb, netsignal, commproto, syncflag, syncfreqhr. Joins to container, shipments.
+* [regulatoryandmaintenance](regulatoryandmaintenance.md) - 23 columns: maintflag, maintdatelast, maintdatenext, calibflag, calibdatelast, calibdatenext, docuflag, compscore, riskflag, incidents, resolveflag, respperson, contactno, contactemerg, inspectdatelast, inspectdatenext, inspectoutcome, correctactions, preventsteps, validflag, verifymethod. Joins to shipments, transportinfo.
+* [sensordata](sensordata.md) - 22 columns: storetempc, temptolc, tempnowc, tempdevcount, tempmaxc, tempminc, tempstabidx, humiditypct, presskpa, shockflag, tiltflag, impactflag, vibelvlmms, lightlux, acceldata, handleevents, critevents, alerts, alerttime, alertkind. Joins to container, transportinfo.
+* [shipments](shipments.md) - 20 columns: timemark, routealign, customsflag, imppermitref, exppermitref, regprofile, insureflag, insureref, qualcheck, integritymark, contamlevel, sterilemark, packagestate, sealflag, sealref, tampersign, handlingguide, storagepose, generalnote.
+* [transportinfo](transportinfo.md) - 21 columns: vehiclekind, vehtempc, speedkm, distdonekm, distleftkm, eta, departsite, currentsite, destsite, gpsflag, latvalue, lonvalue, altmeter, locupdatemin, locupdatemark, transmode, carrlabel, carrcert. Joins to container, shipments.
+* [vaccinedetails](vaccinedetails.md) - 11 columns: vacvariant, mfgsource, batchlabel, prodday, expireday, lotmeasure, vialtally, dosepervial, dosetotal. Joins to container, shipments.

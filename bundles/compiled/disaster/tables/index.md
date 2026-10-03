@@ -1,0 +1,12 @@
+# PostgreSQL Table
+
+* [beneficiariesandassessments](beneficiariesandassessments.md) - 10 columns: beneregister, vulnerabilityreview, needsassessstatus, distequityidx, benefeedbackscore, commengagelvl, localcapacitygrowth. Joins to disasterevents, operations.
+* [coordinationandevaluation](coordinationandevaluation.md) - 29 columns: secincidentcount, safetyranking, accesslimitation, coordeffectlvl, partnerorgs, infosharingstate, reportcompliance, dataqualityvalue, monitoringfreq, evaluationstage, lessonslearnedstage, contingencyplanstage, riskmitigationsteps, insurancescope, compliancestate, auditstate, qualitycontrolsteps, stakeholdersatisf, mediacoversentiment, publicperception, documentationstate, lessonsrecorded, bestpracticeslisted, improvementrecs, nextreviewdate, notes. Joins to disasterevents, operations.
+* [disasterevents](disasterevents.md) - 9 columns: timemark, haztype, hazlevel, affectedarea, regiontag, latcoord, loncoord, impactmetrics.
+* [distributionhubs](distributionhubs.md) - 11 columns: hubcaptons, hubutilpct, storecapm3, storeavailm3, coldstorecapm3, coldstoretempc, warehousestate, invaccpct, stockturnrate. Joins to disasterevents.
+* [environmentandhealth](environmentandhealth.md) - 13 columns: envimpactrate, wastemanagementstate, recyclepct, carbontons, renewenergypct, waterqualityindex, sanitationcoverage, diseaserisk, medicalemergencycapacity, vaccinationcoverage, mentalhealthaid. Joins to disasterevents.
+* [financials](financials.md) - 13 columns: budgetallotusd, fundsutilpct, costbeneusd, opscostsusd, transportcostsusd, storagecostsusd, personnelcostsusd, fundingstate, donorcommitmentsusd, resourcegapsusd. Joins to disasterevents, operations.
+* [humanresources](humanresources.md) - 4 columns: staffingprofile. Joins to disasterevents, operations.
+* [operations](operations.md) - 12 columns: emerglevel, respphase, opsstatus, coordcenter, opsstartdate, estdurationdays, priorityrank, resourceallocstate, supplyflowstate. Joins to disasterevents, distributionhubs.
+* [supplies](supplies.md) - 4 columns: resourceinventory. Joins to disasterevents, distributionhubs.
+* [transportation](transportation.md) - 18 columns: vehiclecount, trucksavailable, helosavailable, boatsavailable, totaldeliverytons, dailydeliverytons, lastmilestatus, distributionpoints, avgdeliveryhours, deliverysuccessrate, routeoptstatus, fuelefficiencylpk, maintenancestate, vehiclebreakrate. Joins to disasterevents, distributionhubs, supplies.

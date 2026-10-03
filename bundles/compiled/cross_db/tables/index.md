@@ -1,0 +1,9 @@
+# PostgreSQL Table
+
+* [auditandcompliance](auditandcompliance.md) - 20 columns: recordregistry, audtrailstate, findtally, critfindnum, remedstate, remeddue, authnotify, bordermech, transimpassess, localreqs, datamapstate, sysintstate, accreqnum, delreqnum, rectreqnum, portreqnum, resptimeday. Joins to compliance, dataprofile, vendormanagement.
+* [compliance](compliance.md) - 16 columns: recordregistry, legalbase, consentstate, consentcoll, consentexp, purplimit, purpdesc, gdprcomp, ccpacomp, piplcomp, loclawcomp, regapprovals, privimpassess, datasubjright. Joins to riskmanagement, vendormanagement.
+* [dataflow](dataflow.md) - 15 columns: flowstamp, flowtag, orignation, destnation, origactor, destactor, chanproto, chanfreq, datasizemb, durmin, bwidthpct, successpct, errtally, rtrytally.
+* [dataprofile](dataprofile.md) - 15 columns: recordregistry, datatype, datasense, volgb, rectally, subjtally, retdays, formattype, qltyscore, intcheck, csumverify, srcvalstate, destvalstate. Joins to dataflow, riskmanagement.
+* [riskmanagement](riskmanagement.md) - 21 columns: recordregistry, riskassess, riskmitstate, secureaction, breachnotify, incidentplan, incidentcount, breachcount, nearmissnum, avgresolhrs, slapct, costusd, penusd, coveragestate, residrisklevel, ctrleff, compscore, maturitylevel, nextrevdate, planstate. Joins to dataflow.
+* [securityprofile](securityprofile.md) - 19 columns: recordregistry, encstate, encmeth, keymanstate, masklevel, anonmeth, psymstate, authmeth, authzframe, aclstate, apisecstate, logintcheck, logretdays, bkpstate, drecstate, bcstate. Joins to dataflow, dataprofile, riskmanagement.
+* [vendormanagement](vendormanagement.md) - 19 columns: recordregistry, vendassess, vendsecrate, vendauddate, contrstate, contrexpire, dpastate, sccstate, bcrstate, docustate, polcomp, proccomp, trainstate, certstate, monstate, repstate, stakecomm. Joins to riskmanagement, securityprofile.
