@@ -2,3 +2,5 @@
 data/*
 !data/README.md
 tools/
+__pycache__/
+*.py[cod]

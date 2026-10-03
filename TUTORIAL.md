@@ -154,3 +154,33 @@ okf-sql-knowledge/
 ```
 
 Go back to [the blog post](LINK-TO-PART-1) and continue with "Get the data".
+
+## Docker
+
+Used to run the LiveSQLBench PostgreSQL database.
+
+### macOS
+1. Install [Docker Desktop for Mac](https://docs.docker.com/desktop/setup/install/mac-install/) (Apple silicon or Intel, to match your Mac).
+2. Open Docker Desktop and wait until the engine is running.
+3. Check:
+   ```bash
+   docker --version
+   docker compose version
+   ```
+
+### Windows
+1. Install [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install/) with the WSL 2 backend.
+2. Open Docker Desktop and wait until the engine is running.
+3. Check in PowerShell:
+   ```powershell
+   docker --version
+   docker compose version
+   ```
+
+### Manage the database container
+Run these from the project folder:
+```bash
+docker compose stop     # stop, keep the data
+docker compose start    # start again
+docker compose down -v  # remove the container and its data
+```
